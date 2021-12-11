@@ -11,4 +11,6 @@ subject to
 
   Ax = b;
   x >= 0.
+  
+  Change path to A, b, C in the code accordingly.
             
