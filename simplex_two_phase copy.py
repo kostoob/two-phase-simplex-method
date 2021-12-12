@@ -116,7 +116,7 @@ def simplex_iterations(tableau,Xb):
     print("\n===============================")
     print("STARTING TABLEAU")
     print("===============================\n")
-    print(tabulate(tableau, tablefmt="github", headers=header_names(tableau), numalign="right"))
+    print(tabulate(np.round(tableau,10), tablefmt="github", headers=header_names(tableau), numalign="right"))
     #PRINTER
 
 
@@ -137,9 +137,9 @@ def simplex_iterations(tableau,Xb):
         print("\n===============================")
         print("ITERATION ",iter)
         print("===============================\n")
-        print(tabulate(tableau, tablefmt="github", headers=header_names(tableau),numalign="right"),"\n\nBasic Variables:",Xb)
+        print(tabulate(np.round(tableau,10), tablefmt="github", headers=header_names(tableau),numalign="right"),"\n\nBasic Variables:",Xb)
 
-        if (np.all(tableau[0,0:n]<=0)):
+        if (np.all(np.round(tableau[0,0:n],10)<=0)):
             flag = 0
             flag = int(flag)
             optimal = 1
@@ -223,7 +223,7 @@ def result_phase1(unbdd, optimal, tableau, Xb, C):
             if Xb[i] > n-m:
                 temp[0] = Xb[i]
                 artificial_variables_in_basis = np.append(artificial_variables_in_basis,temp,axis= 0)
-                temp[0] = round((tableau[i+1,n]),5)
+                temp[0] = round((tableau[i+1,n]),10)
                 val = np.append(val,temp,axis= 0)
                 if temp == 0:
                     temp_row[0] = i+1
@@ -269,7 +269,7 @@ def result_phase1(unbdd, optimal, tableau, Xb, C):
         temp = np.append(np.transpose(C), zero_col, 1)
         tableau[0,0:n+1] = np.subtract((np.transpose(Cb) @ tableau[1:m+1,:]), temp)
         print("Updated Tableau:\n")
-        print(tabulate(tableau, tablefmt="github", headers=header_names(tableau), numalign="right"),"\n\nBasic Variables:",Xb)
+        print(tabulate(np.round(tableau,10), tablefmt="github", headers=header_names(tableau), numalign="right"),"\n\nBasic Variables:",Xb)
         print(" ")
         print("\n End of Phase I. \n Phase II:\n")
         return tableau, Xb, 1
